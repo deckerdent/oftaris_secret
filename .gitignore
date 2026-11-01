@@ -24,7 +24,7 @@ coverage
 *.njsproj
 *.sln
 *.sw?
-.tools/**/*.db
+.tools/*
 *.tsbuildinfo
 
 .eslintcache
