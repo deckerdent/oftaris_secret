@@ -1,0 +1,62 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Vue: Start Dev Server",
+      "type": "npm",
+      "script": "dev",
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      },
+      "runOptions": {
+        "instanceLimit": 1
+      }
+    },
+    {
+      "label": "Vue: Stop Dev Server",
+      "detail": "Windows: stop only Vite dev servers belonging to this workspace.",
+      "type": "process",
+      "command": "powershell.exe",
+      "args": [
+        "-NoProfile",
+        "-NonInteractive",
+        "-Command",
+        "$projectRoot = $env:VUE_PROJECT_ROOT + [IO.Path]::DirectorySeparatorChar; $viteScript = [IO.Path]::DirectorySeparatorChar + [IO.Path]::Combine('vite', 'bin', 'vite.js'); $servers = @(Get-CimInstance Win32_Process -Filter \"Name = 'node.exe'\" | Where-Object { if (-not $_.CommandLine) { return $false }; $commandLine = $_.CommandLine.Replace([char]47, [char]92); $commandLine.IndexOf($projectRoot, [StringComparison]::OrdinalIgnoreCase) -ge 0 -and $commandLine.IndexOf($viteScript, [StringComparison]::OrdinalIgnoreCase) -ge 0 -and $commandLine -notmatch ' (?:build|preview)(?: |$)' }); if ($servers.Count -eq 0) { Write-Output 'No Vite dev server found for this workspace.' } else { $servers | ForEach-Object { Stop-Process -Id $_.ProcessId -ErrorAction Stop; Write-Output ('Stopped workspace Vite server (PID {0}).' -f $_.ProcessId) } }"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "VUE_PROJECT_ROOT": "${workspaceFolder}"
+        }
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "Vue: Build",
+      "type": "npm",
+      "script": "build",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": "$tsc",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    }
+  ]
+}
