@@ -15,6 +15,8 @@ export interface DiscussionComment {
 export interface DiscussionThread extends DiscussionComment {
   reactionScore: number
   myReaction: Reaction
+  canEdit: boolean
+  canDelete: boolean
 }
 
 export interface CommentNode extends DiscussionThread {
@@ -28,7 +30,49 @@ interface ReactionSummary {
   my_reaction: Reaction
 }
 
+interface CommentManagementPermission {
+  comment_id: string
+  can_edit: boolean
+  can_delete: boolean
+}
+
 const commentSelection = 'id, parent_comment_id, thread_id, body, created_at, deleted_at'
+
+async function loadCommentManagementPermissions(
+  ids: string[],
+): Promise<Map<string, { canEdit: boolean; canDelete: boolean }>> {
+  if (ids.length === 0) {
+    return new Map()
+  }
+
+  const { data, error } = await supabase.rpc('get_comment_management_permissions', {
+    p_comment_ids: ids,
+  })
+
+  if (error) {
+    throw new Error(error.message)
+  }
+
+  const permissions = new Map<string, { canEdit: boolean; canDelete: boolean }>()
+  for (const permission of (data ?? []) as CommentManagementPermission[]) {
+    permissions.set(permission.comment_id, {
+      canEdit: permission.can_edit,
+      canDelete: permission.can_delete,
+    })
+  }
+  return permissions
+}
+
+function getCommentManagementPermission(
+  permissions: Map<string, { canEdit: boolean; canDelete: boolean }>,
+  id: string,
+): { canEdit: boolean; canDelete: boolean } {
+  const permission = permissions.get(id)
+  if (!permission) {
+    throw new Error(`Comment permissions were not returned for ${id}`)
+  }
+  return permission
+}
 
 async function loadReactionSummaries(
   target: ReactionTarget,
@@ -73,16 +117,21 @@ export async function loadDiscussionThreads(
   }
 
   const rows = data ?? []
-  const summaries = await loadReactionSummaries(
-    'thread',
-    rows.map((row) => row.id),
-  )
+  const ids = rows.map((row) => row.id)
+  const [summaries, permissions] = await Promise.all([
+    loadReactionSummaries('thread', ids),
+    loadCommentManagementPermissions(ids),
+  ])
 
-  return rows.map((row) => ({
-    ...row,
-    reactionScore: summaries.get(row.id)?.reaction_score ?? 0,
-    myReaction: summaries.get(row.id)?.my_reaction ?? null,
-  }))
+  return rows.map((row) => {
+    const permission = getCommentManagementPermission(permissions, row.id)
+    return {
+      ...row,
+      ...permission,
+      reactionScore: summaries.get(row.id)?.reaction_score ?? 0,
+      myReaction: summaries.get(row.id)?.my_reaction ?? null,
+    }
+  })
 }
 
 export async function loadDiscussionThread(threadId: string): Promise<CommentNode> {
@@ -102,12 +151,13 @@ export async function loadDiscussionThread(threadId: string): Promise<CommentNod
     throw new Error('Discussion thread not found')
   }
 
-  const [commentSummaries, threadSummaries] = await Promise.all([
+  const [commentSummaries, threadSummaries, permissions] = await Promise.all([
     loadReactionSummaries(
       'comment',
       rows.filter((row) => row.id !== threadId).map((row) => row.id),
     ),
     loadReactionSummaries('thread', [threadId]),
+    loadCommentManagementPermissions(rows.map((row) => row.id)),
   ])
   const nodes = new Map<string, CommentNode>(
     rows.map((row) => {
@@ -115,10 +165,12 @@ export async function loadDiscussionThread(threadId: string): Promise<CommentNod
         row.id === threadId
           ? threadSummaries.get(row.id)
           : commentSummaries.get(row.id)
+      const permission = getCommentManagementPermission(permissions, row.id)
       return [
         row.id,
         {
           ...row,
+          ...permission,
           reactionScore: summary?.reaction_score ?? 0,
           myReaction: summary?.my_reaction ?? null,
           children: [],
@@ -187,6 +239,38 @@ export async function createDiscussion(body: string): Promise<string> {
   }
 
   return data.id
+}
+
+export async function updateDiscussionComment(commentId: string, body: string): Promise<void> {
+  const content = body.trim()
+  if (!content) {
+    throw new Error('Comment text cannot be empty')
+  }
+
+  const { data, error } = await supabase
+    .from('comments')
+    .update({ body: content })
+    .eq('id', commentId)
+    .select('id')
+    .maybeSingle()
+
+  if (error) {
+    throw new Error(error.message)
+  }
+
+  if (!data) {
+    throw new Error('The comment could not be updated')
+  }
+}
+
+export async function deleteDiscussionComment(commentId: string): Promise<void> {
+  const { error } = await supabase.rpc('delete_comment', {
+    p_comment_id: commentId,
+  })
+
+  if (error) {
+    throw new Error(error.message)
+  }
 }
 
 export async function updateDiscussionReaction(

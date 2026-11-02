@@ -42,7 +42,7 @@ The UI uses Vue I18n with English and German messages in `src/locales/`. The sel
 
 ## Styling
 
-The app uses Web Awesome components and `wa-*` custom elements. Its default theme is copied into `src/assets/webawesome/styles/` with the relative palette and layer files it imports; make visual theme overrides in that local copy. The app follows the operating system's light or dark color preference and updates when that preference changes.
+The app uses Web Awesome components and `wa-*` custom elements. Its default theme is copied into `src/assets/webawesome/styles/` with the relative palette and layer files it imports; make visual theme overrides in that local copy. The theme follows the operating system's light or dark preference by default and updates when that preference changes; using the theme toggle saves an explicit light or dark choice. The Game page distinguishes documented local history from the fictional treasure-hunt legend.
 
 ## Authentication
 

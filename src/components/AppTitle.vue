@@ -43,7 +43,7 @@ const { t } = useI18n()
   font-weight: var(--wa-font-weight-bold);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 960px) {
   .app-title {
     --app-logo-size: 8rem;
   }

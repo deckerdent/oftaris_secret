@@ -9,6 +9,7 @@ import {
   type CommentNode,
 } from '@/services/discussions'
 import CommentNodeView from '@/components/discussions/CommentNode.vue'
+import CommentActions from '@/components/discussions/CommentActions.vue'
 import ReactionControl from '@/components/discussions/ReactionControl.vue'
 import ReplyComposer from '@/components/discussions/ReplyComposer.vue'
 
@@ -74,7 +75,16 @@ watch(
 
     <template v-else>
       <article class="thread-card">
-        <p class="thread-card__body">{{ displayBody }}</p>
+        <CommentActions
+          :comment-id="thread.id"
+          :body="thread.body"
+          :deleted="Boolean(thread.deleted_at)"
+          :can-edit="thread.canEdit"
+          :can-delete="thread.canDelete"
+          @updated="load"
+        >
+          <p class="thread-card__body">{{ displayBody }}</p>
+        </CommentActions>
         <footer class="thread-card__footer">
           <time :datetime="thread.created_at">{{ createdAt }}</time>
           <ReactionControl
@@ -159,9 +169,10 @@ watch(
   margin-inline: auto;
   border: 1px solid var(--wa-color-surface-border);
   border-radius: var(--wa-border-radius-l);
-  background: var(--wa-color-surface-default);
+  background: color-mix(in srgb, var(--wa-color-surface-raised) 90%, transparent);
   padding: clamp(1.25rem, 4vw, 2rem);
   box-shadow: var(--wa-shadow-m);
+  backdrop-filter: blur(3px);
 }
 
 .thread-card__body {
@@ -186,8 +197,10 @@ watch(
   margin: 1.5rem auto 0;
   border: 1px solid var(--wa-color-surface-border);
   border-radius: var(--wa-border-radius-l);
-  background: var(--wa-color-surface-default);
+  background: color-mix(in srgb, var(--wa-color-surface-raised) 90%, transparent);
   padding: clamp(1rem, 4vw, 1.5rem);
+  box-shadow: var(--wa-shadow-s);
+  backdrop-filter: blur(3px);
 }
 
 .thread-comments h1 {

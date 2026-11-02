@@ -11,6 +11,7 @@ import {
   type DiscussionThread,
 } from '@/services/discussions'
 import ReactionControl from '@/components/discussions/ReactionControl.vue'
+import CommentActions from '@/components/discussions/CommentActions.vue'
 
 const { t, locale } = useI18n()
 const router = useRouter()
@@ -105,7 +106,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <section class="page-content discussions-page">
+  <section class="page-content page-content--after-eyebrow discussions-page">
     <header class="discussions-page__header">
       <div class="discussions-page__title-row">
         <PageTitle>{{ t('discussions.title') }}</PageTitle>
@@ -173,11 +174,20 @@ onMounted(() => {
       <ul class="discussion-list">
         <li v-for="thread in threads" :key="thread.id" class="discussion-list__item">
           <article class="discussion-card">
-            <RouterLink class="discussion-card__link" :to="`/discussions/${thread.id}`">
-              <p class="discussion-card__body">
-                {{ thread.deleted_at ? t('discussions.deleted') : thread.body }}
-              </p>
-            </RouterLink>
+            <CommentActions
+              :comment-id="thread.id"
+              :body="thread.body"
+              :deleted="Boolean(thread.deleted_at)"
+              :can-edit="thread.canEdit"
+              :can-delete="thread.canDelete"
+              @updated="load"
+            >
+              <RouterLink class="discussion-card__link" :to="`/discussions/${thread.id}`">
+                <p class="discussion-card__body">
+                  {{ thread.deleted_at ? t('discussions.deleted') : thread.body }}
+                </p>
+              </RouterLink>
+            </CommentActions>
             <footer class="discussion-card__footer">
               <time :datetime="thread.created_at">
                 {{ formatDiscussionDateTime(thread.created_at, locale) }}
@@ -211,7 +221,6 @@ onMounted(() => {
 
 <style scoped>
 .discussions-page {
-  padding-block-start: calc(var(--page-title-top-spacing) + 2.25rem);
   padding-block-end: clamp(2rem, 7vw, 4rem);
 }
 
@@ -252,6 +261,10 @@ onMounted(() => {
 .discussions-page__create-button {
   color: var(--wa-color-brand-on-loud);
   background: var(--wa-color-brand-fill-loud);
+  max-width: 100%;
+  min-width: 0;
+  padding: 0.85rem 1.25rem;
+  white-space: normal;
 }
 
 .discussions-page__create-button:disabled,
@@ -268,8 +281,10 @@ onMounted(() => {
   margin-inline: auto;
   border: 1px solid var(--wa-color-surface-border);
   border-radius: var(--wa-border-radius-l);
-  background: var(--wa-color-surface-default);
+  background: color-mix(in srgb, var(--wa-color-surface-raised) 90%, transparent);
   padding: clamp(1rem, 3vw, 1.5rem);
+  box-shadow: var(--wa-shadow-s);
+  backdrop-filter: blur(3px);
 }
 
 .discussion-composer__label {
@@ -321,8 +336,11 @@ onMounted(() => {
   margin-inline: auto;
   border: 1px solid var(--wa-color-surface-border);
   border-radius: var(--wa-border-radius-l);
+  background: color-mix(in srgb, var(--wa-color-surface-raised) 90%, transparent);
   color: var(--wa-color-text-quiet);
   padding: 1.5rem;
+  box-shadow: var(--wa-shadow-s);
+  backdrop-filter: blur(3px);
 }
 
 .discussions-page__retry {
@@ -360,8 +378,10 @@ onMounted(() => {
 .discussion-card {
   border: 1px solid var(--wa-color-surface-border);
   border-radius: var(--wa-border-radius-l);
-  background: var(--wa-color-surface-default);
+  background: color-mix(in srgb, var(--wa-color-surface-raised) 90%, transparent);
   padding: clamp(1rem, 3vw, 1.5rem);
+  box-shadow: var(--wa-shadow-s);
+  backdrop-filter: blur(3px);
 }
 
 .discussion-card__link {

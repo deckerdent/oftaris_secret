@@ -106,10 +106,15 @@ async function setReaction(reaction: Exclude<Reaction, null>): Promise<void> {
   cursor: pointer;
 }
 
-.reaction-control__button:hover:not(:disabled),
-.reaction-control__button--active {
+.reaction-control__button:hover:not(:disabled) {
   color: var(--wa-color-brand-on-normal);
   background: var(--wa-color-neutral-fill-quiet);
+}
+
+.reaction-control__button--active {
+  color: var(--wa-color-brand-on-normal);
+  background: var(--wa-color-brand-fill-quiet);
+  box-shadow: inset 0 0 0 1px var(--wa-color-focus);
 }
 
 .reaction-control__button:disabled {

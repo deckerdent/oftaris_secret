@@ -17,7 +17,8 @@ function changeLocale(selectedLocale: Locale): void {
       size="s"
       :aria-label="t('language.label')"
     >
-      <wa-icon name="globe" :label="t('language.label')" />
+      <wa-icon name="globe" aria-hidden="true" />
+      <span class="language-switcher__label">{{ t('language.label') }}</span>
     </wa-button>
     <wa-dropdown-item
       v-for="option in localeOptions"

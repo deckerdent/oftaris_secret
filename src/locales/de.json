@@ -1,13 +1,20 @@
 {
   "navigation": {
     "start": "Start",
+    "game": "Das Spiel",
     "discussions": "Diskussionen",
     "about": "Über",
     "primaryLabel": "Hauptnavigation",
-    "toggle": "Navigation umschalten"
+    "toggle": "Navigation umschalten",
+    "openMenu": "Konto- und Anzeigeoptionen öffnen",
+    "closeMenu": "Konto- und Anzeigeoptionen schließen"
   },
   "language": {
     "label": "Sprache"
+  },
+  "theme": {
+    "switchToDark": "Dunkles Design aktivieren",
+    "switchToLight": "Helles Design aktivieren"
   },
   "auth": {
     "signInWithGoogle": "Mit Google anmelden",
@@ -30,8 +37,36 @@
     "eyebrow": "Eine Schatzsuche durch Oftersheim",
     "title": "Entdecke Oftaris Secret",
     "description": "Folge den Hinweisen, entdecke die Geschichte vor Ort und suche nach dem verborgenen römischen Schatz.",
-    "learnMore": "Entdecke die Geschichte",
+    "previewTitle": "Vorschau",
+    "previewNotice": "Das Spiel befindet sich in der Vorschau und ist noch nicht spielbereit. Sobald es live geht, entfernen wir diesen Hinweis.",
+    "game": "Das Spiel entdecken",
     "discussions": "An der Diskussion teilnehmen"
+  },
+  "gamePage": {
+    "title": "Das Spiel",
+    "intro": "Entdecke zuerst die belegte Geschichte Oftersheims und anschließend die Legende hinter einer fiktiven Schatzsuche.",
+    "historyTitle": "Ein kurzer Blick auf Oftersheims Geschichte",
+    "historyRoman": "Bei archäologischen Untersuchungen wurden in den 1960er-Jahren Überreste von mindestens zwei Häusern aus der Römerzeit entdeckt.",
+    "historyFrankish": "Jahrhunderte später lebten fränkische Siedler in der Gegend. Einer von ihnen könnte Oftari gewesen sein, dessen Name oft mit Oftersheim in Verbindung gebracht wird. Er soll hier im 7. oder 8. Jahrhundert gelebt haben; sicher belegt ist dieser Zusammenhang jedoch nicht.",
+    "historyRecord": "Der Name Oftersheim wird erstmals 766 n. Chr. im Lorscher Codex erwähnt. Der Ort ist etwa 1.250 Jahre alt und blickt auf eine mehr als tausendjährige Geschichte zurück.",
+    "historyLinkIntro": "Mehr über die Geschichte des Ortes erfährst du auf der",
+    "historyLink": "offiziellen Website von Oftersheim",
+    "legendTitle": "Die Legende von Oftaris Geheimnis",
+    "legendDisclaimer": "Die folgende Geschichte ist eine moderne, von der Ortsgeschichte inspirierte Legende und keine belegte historische Überlieferung.",
+    "legendDiscovery": "Der Legende nach fand Oftari – ein Dorfvorsteher, der für seine Zeit ungewöhnlich gut lesen und ein wenig schreiben konnte – zwischen den zerbrochenen Steinen einer römischen Villa eine Karte. Sie schien zu einem Schatz zu führen, den die Römer zurückgelassen hatten. Oftari suchte vergeblich. Schließlich legte er die Karte an ihren Fundort zurück und hielt das Geheimnis in seinem Tagebuch fest – in der Hoffnung, dass eines Tages jemand mehr Glück haben würde.",
+    "legendOrder": "Viele Jahrhunderte später, in den 1790er-Jahren, entdeckten Heimatforscher das Tagebuch bei einer Ausgrabung. Seine Seiten erzählten von der Karte und ihrem Fundort. Der Bürgermeister fürchtete, die Kunde vom Schatz könnte eine Schar Suchender ins Dorf locken und es gefährden. Gemeinsam mit einigen Vertrauten aus dem Rat gründete er den Orden der Hüter und entfernte die Seite, die zum Versteck der Karte führte. Von da an wurde das Geheimnis still von einem Hüter zum nächsten weitergegeben.",
+    "legendWartimeLead": "Über Generationen wachte der Orden über Oftaris Geheimnis. Doch in den 1940er-Jahren erfuhren die Nationalsozialisten von der verborgenen Gemeinschaft und begannen, nach der Seite zu suchen.",
+    "photoAlt": "Schwarz-Weiß-Stillleben mit Schreibmaschine, Dokumenten, einem alten Telefon und Fotografien.",
+    "photoCaption": "Stimmungsvolle Illustration zum Kriegsteil der Legende; dies ist keine dokumentarische Aufnahme der Ereignisse.",
+    "legendWartimeDetail": "Ein NS-Dokument bewahrt die Worte eines gefangenen Hüters: „Die Tagebuchseite ist dort, wo sie in alter Zeit ihre Toten begruben.“ Die übrigen Hüter handelten schnell. Als die Suchenden den Ort erreichten, war die Seite bereits verschwunden; sie fanden nur einen maschinengeschriebenen Brief, der ihre Mühen verspottete. Die Seite war an einen anderen Ort gebracht worden, und ihre Spur verlor sich im Dunkel.",
+    "playTitle": "Mach dich auf Schatzsuche",
+    "playDescription": "Aus der Legende wird ein Spiel: Folge den Spuren durch Oftersheim und suche nach dem verborgenen Schatz, den die Römer vor Jahrhunderten zurückgelassen haben sollen.",
+    "playStartingPoint": "Die Suche beginnt mit den Worten aus den NS-Akten: „Die Tagebuchseite ist dort, wo sie in alter Zeit ihre Toten begruben.“ Nach dem Krieg fanden Historiker die Akten und suchten nach der Kiste, welche die Nationalsozialisten am Fundort zurückgelassen hatten – in der Hoffnung, der Orden würde eines Tages zurückkehren. Sie glaubten, mit dem „alten Friedhof“ sei der örtliche Friedhof gemeint. Doch dort war die Kiste nicht. Wenn der Hinweis stimmt, muss der alte Friedhof anderswo liegen – und die Suche geht weiter.",
+    "rulesTitle": "Bitte beachte",
+    "ruleOne": "Entferne, verändere oder zerstöre keine Hinweise.",
+    "ruleTwo": "Lege jeden Hinweis wieder an seinen Platz, damit andere ihn finden können.",
+    "ruleThree": "Verhalte dich verantwortungsvoll und respektiere Anwohner, Privatgrundstücke und öffentliche Bereiche.",
+    "ruleFour": "Eine UV-Lampe ist hilfreich, denn manche Botschaften könnten mit Spezialtinte geschrieben sein."
   },
   "discussions": {
     "title": "Diskussionen",
@@ -66,7 +101,17 @@
     "reactionError": "Deine Reaktion konnte nicht gespeichert werden.",
     "commentError": "Dein Kommentar konnte nicht gesendet werden.",
     "backToDiscussions": "Zurück zu den Diskussionen",
-    "deleted": "[gelöscht]"
+    "deleted": "[gelöscht]",
+    "edit": "Bearbeiten",
+    "delete": "Löschen",
+    "editComment": "Kommentar bearbeiten",
+    "saveChanges": "Änderungen speichern",
+    "savingComment": "Wird gespeichert …",
+    "confirmDeleteComment": "Beim Löschen wird der Text dieses Kommentars durch einen Löschhinweis ersetzt. Möchtest du fortfahren?",
+    "confirmDelete": "Kommentar löschen",
+    "deletingComment": "Wird gelöscht …",
+    "editError": "Dein Kommentar konnte nicht aktualisiert werden.",
+    "deleteError": "Dein Kommentar konnte nicht gelöscht werden."
   },
   "greeting": {
     "description": "Du hast erfolgreich ein Projekt mit",
