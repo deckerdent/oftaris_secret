@@ -410,4 +410,10 @@ onMounted(() => {
   color: var(--wa-color-text-quiet);
   font-size: var(--wa-font-size-s);
 }
+
+@media (max-width: 600px) {
+  .discussion-list__item {
+    margin-inline-start: 0;
+  }
+}
 </style>

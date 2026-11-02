@@ -80,10 +80,11 @@ async function submitLocalAuth(): Promise<void> {
 </script>
 
 <template>
-  <div class="auth-menu">
+  <div class="auth-menu" :class="{ 'auth-menu--signed-out': !user }">
     <wa-dropdown v-if="user" placement="bottom-end">
       <wa-button
         slot="trigger"
+        class="auth-menu__profile"
         appearance="plain"
         size="s"
         :aria-label="profileLabel"
@@ -104,7 +105,8 @@ async function submitLocalAuth(): Promise<void> {
       </wa-dropdown-item>
     </wa-dropdown>
     <wa-button
-      v-else-if="!isLocalDevelopmentAuthEnabled"
+      v-else-if="!isLoading && !isLocalDevelopmentAuthEnabled"
+      class="auth-menu__google"
       variant="brand"
       appearance="accent"
       :disabled="isLoading || isSigningIn"
@@ -112,7 +114,7 @@ async function submitLocalAuth(): Promise<void> {
     >
       {{ t(isSigningIn ? 'auth.signingIn' : 'auth.signInWithGoogle') }}
     </wa-button>
-    <div v-else class="local-auth">
+    <div v-else-if="!isLoading" class="local-auth">
       <wa-button
         variant="brand"
         appearance="accent"
@@ -167,6 +169,18 @@ async function submitLocalAuth(): Promise<void> {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+}
+
+.auth-menu__profile::part(base) {
+  min-width: 2.5rem;
+  min-height: 2.5rem;
+  padding: 0;
+}
+
+.auth-menu__google {
+  --wa-color-brand-fill-loud: #1a56a8;
+  --wa-color-brand-border-loud: #1a56a8;
+  --wa-color-brand-on-loud: #fff;
 }
 
 .profile-avatar {
@@ -263,5 +277,64 @@ async function submitLocalAuth(): Promise<void> {
   margin: 0;
   color: var(--wa-color-text-quiet);
   font-size: var(--wa-font-size-s);
+}
+
+@media (max-width: 960px) {
+  .auth-menu:not(.auth-menu--signed-out) {
+    position: relative;
+  }
+
+  .auth-menu:not(.auth-menu--signed-out) .auth-error {
+    position: absolute;
+    z-index: 3;
+    inset-block-start: 100%;
+    inset-inline-end: 0;
+    width: min(18rem, calc(100vw - 2rem));
+    border: 1px solid var(--wa-color-surface-border);
+    border-radius: var(--wa-border-radius-m);
+    background: var(--wa-color-surface-raised);
+  }
+
+  .auth-menu--signed-out {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .auth-menu__google,
+  .local-auth {
+    width: 100%;
+    animation: auth-slide-in 350ms ease-out backwards;
+  }
+
+  .auth-menu__google::part(base),
+  .local-auth > wa-button::part(base) {
+    width: 100%;
+    border-radius: 0;
+  }
+
+  .auth-error {
+    padding: 0.5rem 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .auth-menu__google,
+  .local-auth {
+    animation: none;
+  }
+}
+
+@keyframes auth-slide-in {
+  from {
+    opacity: 0;
+    clip-path: inset(100% 0 0);
+    transform: translateY(-100%);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(0);
+    transform: translateY(0);
+  }
 }
 </style>

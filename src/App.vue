@@ -7,8 +7,10 @@ import LanguageSwitcher from '@/components/LanguageSwitcher.vue'
 import AuthMenu from '@/components/AuthMenu.vue'
 import AppTitle from '@/components/AppTitle.vue'
 import ThemeToggle from '@/components/ThemeToggle.vue'
+import { useAuthStore } from '@/stores/auth'
 
 const { t } = useI18n()
+const auth = useAuthStore()
 const utilitiesMenuOpen = ref(false)
 const utilitiesMenuRef = ref<HTMLElement | null>(null)
 
@@ -41,7 +43,7 @@ onBeforeUnmount(() => {
 
 <template>
   <wa-page>
-    <header slot="header" class="app-header">
+    <header slot="header" class="app-header" :class="{ 'app-header--signed-out': !auth.user }">
       <div class="app-header__brand">
         <AppTitle />
       </div>
@@ -53,6 +55,7 @@ onBeforeUnmount(() => {
         <RouterLink to="/game">{{ t('navigation.game') }}</RouterLink>
         <RouterLink to="/discussions">{{ t('navigation.discussions') }}</RouterLink>
       </nav>
+      <AuthMenu class="app-header__auth" />
       <div ref="utilitiesMenuRef" class="app-header__utilities">
         <button
           type="button"
@@ -69,7 +72,6 @@ onBeforeUnmount(() => {
           class="app-header__actions"
           :class="{ 'app-header__actions--open': utilitiesMenuOpen }"
         >
-          <AuthMenu />
           <LanguageSwitcher />
           <ThemeToggle />
         </div>

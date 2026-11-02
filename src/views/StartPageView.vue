@@ -126,4 +126,10 @@ const { t } = useI18n()
   background: #eee;
   color: #1f1f1f;
 }
+
+@media (max-width: 600px) {
+  .start-page__eyebrow {
+    white-space: normal;
+  }
+}
 </style>

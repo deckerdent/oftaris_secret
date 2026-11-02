@@ -216,4 +216,15 @@ watch(
 .thread-comments__list {
   margin-block: 0.75rem 1rem;
 }
+
+@media (max-width: 600px) {
+  .thread-page {
+    width: calc(100% - 20px);
+  }
+
+  .thread-card,
+  .thread-comments {
+    padding-inline: 10px;
+  }
+}
 </style>
