@@ -1,4 +1,4 @@
-DROP FUNCTION public.get_comment_reaction_summaries(uuid[]);
+DROP FUNCTION IF EXISTS public.get_comment_reaction_summaries(uuid[]);
 CREATE FUNCTION public.get_comment_reaction_summaries(p_comment_ids uuid[])
 RETURNS TABLE (comment_id uuid, reaction_score bigint, my_reaction text)
 LANGUAGE sql
@@ -28,7 +28,7 @@ AS $$
   GROUP BY comment.id;
 $$;
 
-DROP FUNCTION public.get_thread_reaction_summaries(uuid[]);
+DROP FUNCTION IF EXISTS public.get_thread_reaction_summaries(uuid[]);
 CREATE FUNCTION public.get_thread_reaction_summaries(p_thread_ids uuid[])
 RETURNS TABLE (thread_id uuid, reaction_score bigint, my_reaction text)
 LANGUAGE sql
