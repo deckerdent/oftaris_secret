@@ -6,6 +6,7 @@
 
 wa-page {
   min-height: 100vh;
+  background: transparent;
 }
 
 wa-page::part(header) {
@@ -93,6 +94,7 @@ wa-page::part(header) {
   display: inline-grid;
   width: 2.5rem;
   height: 2.5rem;
+  padding: 0;
   place-items: center;
   border: 1px solid var(--wa-color-surface-border);
   border-radius: 50%;
@@ -115,6 +117,7 @@ wa-page::part(header) {
 
 .theme-toggle wa-icon {
   font-size: 1.1rem;
+  margin: 0;
 }
 
 .language-switcher__label,
