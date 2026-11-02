@@ -9,7 +9,7 @@ const { isDarkTheme, toggleTheme } = useTheme()
 <template>
   <button
     type="button"
-    class="theme-toggle"
+    class="header-display-control theme-toggle"
     :aria-label="t(isDarkTheme ? 'theme.switchToLight' : 'theme.switchToDark')"
     :title="t(isDarkTheme ? 'theme.switchToLight' : 'theme.switchToDark')"
     @click="toggleTheme"

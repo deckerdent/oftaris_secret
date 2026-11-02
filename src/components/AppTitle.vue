@@ -45,17 +45,17 @@ const { t } = useI18n()
 
 @media (max-width: 960px) {
   .app-title {
-    --app-logo-size: 8rem;
+    --app-logo-size: clamp(3.5rem, 13vw, 5rem);
+    gap: 0.35rem;
+    padding-inline-start: 0;
   }
-}
 
-@media (max-width: 420px) {
-  .app-title {
-    --app-logo-size: 4rem;
+  .app-title__logo {
+    position: static;
   }
 
   .app-title__text {
-    font-size: var(--wa-font-size-s);
+    font-size: 1.2rem;
   }
 }
 </style>

@@ -5,6 +5,7 @@ import type { Session } from '@supabase/supabase-js'
 import { supabase } from '@/config/supabase'
 import { i18n, setLocale } from '@/i18n'
 import AuthMenu from '@/components/AuthMenu.vue'
+import App from '@/App.vue'
 import { canUseLocalEmailAuth, useAuthStore } from '../auth'
 
 vi.mock('@/config/supabase', () => ({
@@ -153,5 +154,33 @@ describe('auth store', () => {
     await wrapper.get('img').trigger('error')
 
     expect(wrapper.get('.profile-avatar').text()).toBe('AL')
+  })
+
+  it('moves from the signed-out header state to the profile without duplicating auth controls', async () => {
+    const pinia = createPinia()
+    setActivePinia(pinia)
+    const authStore = useAuthStore()
+    const wrapper = mount(App, {
+      global: {
+        plugins: [pinia, i18n],
+        stubs: ['RouterLink', 'RouterView', 'SupaBaseStatus', 'LanguageSwitcher', 'ThemeToggle', 'AppTitle'],
+      },
+    })
+
+    expect(wrapper.get('.app-header').classes()).toContain('app-header--signed-out')
+    expect(wrapper.find('.auth-menu__google').exists()).toBe(false)
+    expect(wrapper.find('.app-header__actions .auth-menu').exists()).toBe(false)
+
+    authStore.isLoading = false
+    await wrapper.vm.$nextTick()
+    expect(wrapper.get('.app-header__auth').classes()).toContain('auth-menu--signed-out')
+    expect(wrapper.get('.app-header__auth wa-button').text()).toContain('Sign in')
+
+    authStore.session = sessionFixture
+    await wrapper.vm.$nextTick()
+    expect(wrapper.get('.app-header').classes()).not.toContain('app-header--signed-out')
+    expect(wrapper.find('.auth-menu__google').exists()).toBe(false)
+    expect(wrapper.find('.app-header__auth .profile-avatar').exists()).toBe(true)
+    expect(wrapper.findAll('.app-header__auth')).toHaveLength(1)
   })
 })

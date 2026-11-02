@@ -11,15 +11,15 @@ function changeLocale(selectedLocale: Locale): void {
 
 <template>
   <wa-dropdown placement="bottom-end">
-    <wa-button
+    <button
       slot="trigger"
-      appearance="plain"
-      size="s"
+      type="button"
+      class="header-display-control language-switcher__button"
       :aria-label="t('language.label')"
     >
       <wa-icon name="globe" aria-hidden="true" />
       <span class="language-switcher__label">{{ t('language.label') }}</span>
-    </wa-button>
+    </button>
     <wa-dropdown-item
       v-for="option in localeOptions"
       :key="option.value"
@@ -30,11 +30,3 @@ function changeLocale(selectedLocale: Locale): void {
     </wa-dropdown-item>
   </wa-dropdown>
 </template>
-
-<style scoped>
-wa-button::part(base) {
-  font-size: 1.25rem;
-  min-height: 2.5rem;
-  min-width: 2.5rem;
-}
-</style>
