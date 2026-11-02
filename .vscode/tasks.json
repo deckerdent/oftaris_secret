@@ -19,6 +19,50 @@
       }
     },
     {
+      "label": "Start Dev with local DB",
+      "detail": "Starts local Supabase, resets its database, and runs Vite against the local API on port 5174. The reset deletes local database data.",
+      "type": "process",
+      "command": "powershell.exe",
+      "args": [
+        "-NoProfile",
+        "-NonInteractive",
+        "-Command",
+        "$ErrorActionPreference = 'Stop'; npx supabase start | Out-Null; if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }; npx supabase db reset --local --no-seed; if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }; $statusJson = npx supabase status --output json; if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }; $supabaseStatus = $statusJson | ConvertFrom-Json; if (-not $supabaseStatus.API_URL -or -not $supabaseStatus.ANON_KEY) { throw 'Local Supabase API URL or anon key is missing.' }; $env:VITE_SUPABASE_URL = $supabaseStatus.API_URL; $env:VITE_SUPABASE_ANON_KEY = $supabaseStatus.ANON_KEY; Write-Output ('Using local Supabase API at {0}' -f $supabaseStatus.API_URL); npm run dev -- --host 127.0.0.1 --port 5174 --strictPort; exit $LASTEXITCODE"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      },
+      "runOptions": {
+        "instanceLimit": 1
+      }
+    },
+    {
+      "label": "Stop Dev with local DB",
+      "detail": "Stops the local Supabase containers. Use after ending manual testing.",
+      "type": "process",
+      "command": "powershell.exe",
+      "args": [
+        "-NoProfile",
+        "-NonInteractive",
+        "-Command",
+        "npx supabase stop; if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    },
+    {
       "label": "Vue: Stop Dev Server",
       "detail": "Windows: stop only Vite dev servers belonging to this workspace.",
       "type": "process",

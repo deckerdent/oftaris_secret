@@ -1,0 +1,106 @@
+{
+  "navigation": {
+    "start": "Start",
+    "discussions": "Discussions",
+    "about": "About",
+    "primaryLabel": "Main navigation",
+    "toggle": "Toggle navigation"
+  },
+  "language": {
+    "label": "Language"
+  },
+  "auth": {
+    "signInWithGoogle": "Sign in with Google",
+    "signingIn": "Signing in…",
+    "profile": "Account",
+    "profilePhotoAlt": "Profile picture",
+    "logout": "Logout",
+    "localTestAccount": "Local test account",
+    "email": "Email",
+    "password": "Password",
+    "localSignIn": "Sign in",
+    "createLocalAccount": "Create account",
+    "useExistingLocalAccount": "Already have an account? Sign in",
+    "localConfirmation": "Account created. Check your email if confirmation is enabled."
+  },
+  "app": {
+    "title": "Oftaris Secret"
+  },
+  "startPage": {
+    "eyebrow": "A treasure hunt through Oftersheim",
+    "title": "Discover Oftaris Secret",
+    "description": "Follow clues, uncover local history, and search for the hidden Roman treasure.",
+    "learnMore": "Discover the story",
+    "discussions": "Join the discussions"
+  },
+  "discussions": {
+    "title": "Discussions",
+    "description": "Follow the conversations and share your thoughts.",
+    "create": "Start a discussion",
+    "signInToCreate": "Sign in to start a discussion",
+    "localSignInHint": "Use Local test account in the header to sign in or create a local account.",
+    "discussionPrompt": "What would you like to discuss?",
+    "submitDiscussion": "Post discussion",
+    "creating": "Posting…",
+    "cancel": "Cancel",
+    "createError": "Your discussion could not be posted.",
+    "empty": "There are no discussions yet.",
+    "loading": "Loading discussions…",
+    "loadError": "Discussions could not be loaded.",
+    "threadError": "This discussion could not be loaded.",
+    "retry": "Try again",
+    "replies": "{count} comments",
+    "loadMore": "Load more discussions",
+    "loadingMore": "Loading more…",
+    "commentsTitle": "Comments",
+    "noComments": "Be the first to comment.",
+    "reply": "Reply",
+    "replyTo": "Reply to this comment",
+    "writeComment": "Write a comment",
+    "submitComment": "Post comment",
+    "posting": "Posting…",
+    "signInToComment": "Sign in to join the discussion.",
+    "voteUp": "Like",
+    "voteDown": "Dislike",
+    "signInToVote": "Sign in to react",
+    "reactionError": "Your reaction could not be saved.",
+    "commentError": "Your comment could not be posted.",
+    "backToDiscussions": "Back to discussions",
+    "deleted": "[deleted]"
+  },
+  "greeting": {
+    "description": "You’ve successfully created a project with",
+    "next": "What’s next?"
+  },
+  "about": {
+    "title": "This is an about page"
+  },
+  "supabase": {
+    "clientStatus": "Supabase client: {status}",
+    "initialized": "initialized",
+    "failed": "failed"
+  },
+  "welcome": {
+    "documentation": {
+      "heading": "Documentation",
+      "description": "Vue’s {officialDocumentation} provides you with all the information you need to get started.",
+      "officialDocumentation": "official documentation"
+    },
+    "tooling": {
+      "heading": "Tooling",
+      "description": "This project is served and bundled with {vite}. The recommended IDE setup is {vscode} + {vueOfficial}. If you need to test your components and web pages, check out {vitest} and {cypress} / {playwright}. More instructions are available in {readme}."
+    },
+    "ecosystem": {
+      "heading": "Ecosystem",
+      "description": "Get official tools and libraries for your project: {pinia}, {router}, {testUtils}, and {devtools}. If you need more resources, we suggest paying {awesomeVue} a visit."
+    },
+    "community": {
+      "heading": "Community",
+      "description": "Got stuck? Ask your question on {vueLand} (our official Discord server), or {stackoverflow}. You should also follow the official {bluesky} Bluesky account or the {x} X account for the latest news in the Vue world."
+    },
+    "support": {
+      "heading": "Support Vue",
+      "description": "As an independent project, Vue relies on community backing for its sustainability. You can help us by {sponsor}."
+    }
+  }
+}

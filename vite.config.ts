@@ -8,7 +8,13 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 export default defineConfig({
   base: '/oftaris_secret/',
   plugins: [
-    vue(),
+    vue({
+      template: {
+        compilerOptions: {
+          isCustomElement: (tag) => tag.startsWith('wa-'),
+        },
+      },
+    }),
     vueDevTools(),
   ],
   resolve: {

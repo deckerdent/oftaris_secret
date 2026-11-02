@@ -1,0 +1,106 @@
+{
+  "navigation": {
+    "start": "Start",
+    "discussions": "Diskussionen",
+    "about": "Über",
+    "primaryLabel": "Hauptnavigation",
+    "toggle": "Navigation umschalten"
+  },
+  "language": {
+    "label": "Sprache"
+  },
+  "auth": {
+    "signInWithGoogle": "Mit Google anmelden",
+    "signingIn": "Anmeldung läuft …",
+    "profile": "Konto",
+    "profilePhotoAlt": "Profilbild",
+    "logout": "Abmelden",
+    "localTestAccount": "Lokales Testkonto",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "localSignIn": "Anmelden",
+    "createLocalAccount": "Konto erstellen",
+    "useExistingLocalAccount": "Schon registriert? Anmelden",
+    "localConfirmation": "Konto erstellt. Prüfe deine E-Mails, falls eine Bestätigung erforderlich ist."
+  },
+  "app": {
+    "title": "Oftaris Secret"
+  },
+  "startPage": {
+    "eyebrow": "Eine Schatzsuche durch Oftersheim",
+    "title": "Entdecke Oftaris Secret",
+    "description": "Folge den Hinweisen, entdecke die Geschichte vor Ort und suche nach dem verborgenen römischen Schatz.",
+    "learnMore": "Entdecke die Geschichte",
+    "discussions": "An der Diskussion teilnehmen"
+  },
+  "discussions": {
+    "title": "Diskussionen",
+    "description": "Verfolge die Gespräche und teile deine Gedanken.",
+    "create": "Diskussion beginnen",
+    "signInToCreate": "Anmelden, um eine Diskussion zu beginnen",
+    "localSignInHint": "Melde dich über „Lokales Testkonto“ im Kopfbereich an oder erstelle dort ein lokales Konto.",
+    "discussionPrompt": "Worüber möchtest du sprechen?",
+    "submitDiscussion": "Diskussion veröffentlichen",
+    "creating": "Wird veröffentlicht …",
+    "cancel": "Abbrechen",
+    "createError": "Deine Diskussion konnte nicht veröffentlicht werden.",
+    "empty": "Es gibt noch keine Diskussionen.",
+    "loading": "Diskussionen werden geladen …",
+    "loadError": "Diskussionen konnten nicht geladen werden.",
+    "threadError": "Diese Diskussion konnte nicht geladen werden.",
+    "retry": "Erneut versuchen",
+    "replies": "{count} Kommentare",
+    "loadMore": "Weitere Diskussionen laden",
+    "loadingMore": "Weitere werden geladen …",
+    "commentsTitle": "Kommentare",
+    "noComments": "Schreibe den ersten Kommentar.",
+    "reply": "Antworten",
+    "replyTo": "Auf diesen Kommentar antworten",
+    "writeComment": "Kommentar schreiben",
+    "submitComment": "Kommentar senden",
+    "posting": "Wird gesendet …",
+    "signInToComment": "Melde dich an, um an der Diskussion teilzunehmen.",
+    "voteUp": "Gefällt mir",
+    "voteDown": "Gefällt mir nicht",
+    "signInToVote": "Zum Reagieren anmelden",
+    "reactionError": "Deine Reaktion konnte nicht gespeichert werden.",
+    "commentError": "Dein Kommentar konnte nicht gesendet werden.",
+    "backToDiscussions": "Zurück zu den Diskussionen",
+    "deleted": "[gelöscht]"
+  },
+  "greeting": {
+    "description": "Du hast erfolgreich ein Projekt mit",
+    "next": "Wie geht es weiter?"
+  },
+  "about": {
+    "title": "Dies ist eine Infoseite"
+  },
+  "supabase": {
+    "clientStatus": "Supabase-Client: {status}",
+    "initialized": "initialisiert",
+    "failed": "fehlgeschlagen"
+  },
+  "welcome": {
+    "documentation": {
+      "heading": "Dokumentation",
+      "description": "Die {officialDocumentation} von Vue enthält alle Informationen, die du für den Einstieg brauchst.",
+      "officialDocumentation": "offizielle Dokumentation"
+    },
+    "tooling": {
+      "heading": "Werkzeuge",
+      "description": "Dieses Projekt wird mit {vite} bereitgestellt und gebündelt. Die empfohlene IDE-Konfiguration besteht aus {vscode} + {vueOfficial}. Wenn du deine Komponenten und Webseiten testen möchtest, probiere {vitest} und {cypress} / {playwright}. Weitere Anleitungen findest du in {readme}."
+    },
+    "ecosystem": {
+      "heading": "Ökosystem",
+      "description": "Hol dir offizielle Tools und Bibliotheken für dein Projekt: {pinia}, {router}, {testUtils} und {devtools}. Weitere Ressourcen findest du bei {awesomeVue}."
+    },
+    "community": {
+      "heading": "Community",
+      "description": "Du kommst nicht weiter? Stelle deine Frage auf {vueLand} (unserem offiziellen Discord-Server) oder auf {stackoverflow}. Folge außerdem dem offiziellen Bluesky-Konto {bluesky} oder dem X-Konto {x}, um aktuelle Neuigkeiten rund um Vue zu erhalten."
+    },
+    "support": {
+      "heading": "Vue unterstützen",
+      "description": "Als unabhängiges Projekt ist Vue für seine Nachhaltigkeit auf Unterstützung aus der Community angewiesen. Du kannst helfen, indem du {sponsor} wirst."
+    }
+  }
+}

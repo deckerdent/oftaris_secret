@@ -35,3 +35,32 @@ Now it's on the players to find the hidden gem no one found since the romans lef
 ## Tools
 
 It is commonly known that secret orders like to hide messages from their enemies by applying special inks. So you should be prepared to use a UV light. 
+
+## Internationalization
+
+The UI uses Vue I18n with English and German messages in `src/locales/`. The selected language is saved in browser storage; on first use, the app uses a supported browser language or falls back to English. When adding a locale, add its messages and register it in `src/i18n.ts` so it is available in the language selector.
+
+## Styling
+
+The app uses Web Awesome components and `wa-*` custom elements. Its default theme is copied into `src/assets/webawesome/styles/` with the relative palette and layer files it imports; make visual theme overrides in that local copy. The app follows the operating system's light or dark color preference and updates when that preference changes.
+
+## Authentication
+
+Sign-in uses Google OAuth through Supabase with the PKCE flow. Enable Google as an auth provider in Supabase and allow both the local app base URL and deployed app base URL (including `/oftaris_secret/`) in Supabase's redirect URL settings. Keep the provider secret in Supabase; only the public anon key belongs in the frontend environment.
+
+## Supabase comments
+
+Database changes live in `supabase/migrations/`. The initial migration creates public, readable comment threads, with each root comment serving as its thread. Authenticated users can create comments, edit their own comments, and soft-delete their own comments; admins can soft-delete any comment. Thread and comment reactions are separate, and each user has one like or dislike per target. Likes add one to the target's net score; dislikes subtract one.
+
+Comment ownership, reaction records, user roles, and profiles (email, display name, and avatar URL) are stored in the `private` schema. The generated `supabase/config.toml` exposes only `public` and `graphql_public`; keep `private` out of the Supabase project's exposed API schemas. The Data API exposes no author or voter identifiers. Reaction totals and the current user's reaction are available through the `get_comment_reaction_summaries` and `get_thread_reaction_summaries` RPCs. Use `set_comment_reaction`, `set_thread_reaction`, and `delete_comment` for writes.
+
+Admin roles must be provisioned by a trusted operator in the Supabase SQL editor or another trusted database connection, never through the frontend:
+
+```sql
+INSERT INTO private.user_roles (user_id, role)
+VALUES ('<auth.users.id>', 'admin');
+```
+
+Apply migrations with the Supabase CLI after linking the project (`npx supabase link --project-ref <project-ref>`), then run `npx supabase db push`. For local development, use `npx supabase start` and `npx supabase db reset`.
+
+For manual UI testing in VS Code, run the `Supabase: Start Local Discussion Board` task. It resets the local database, applies migrations, and starts Vite on port 5174 using the local Supabase API without changing `.env.local`. Open `http://127.0.0.1:5174/oftaris_secret/#/discussions`; run `Supabase: Stop Local Stack` when finished. The reset deletes existing local database data. Local development shows a test-account sign-in/sign-up option; it is available only when Vite is in development mode and uses a localhost Supabase URL.
