@@ -1,0 +1,26 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-width: 20rem;
+  min-height: 100vh;
+  color: var(--wa-color-text-normal);
+  background: var(--wa-color-surface-default);
+  font-family: var(--wa-font-family-body);
+  font-size: var(--wa-font-size-m);
+  line-height: var(--wa-line-height-normal);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
